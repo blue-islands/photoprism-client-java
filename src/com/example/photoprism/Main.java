@@ -11,23 +11,14 @@ public class Main {
         );
 
         final var req = SearchRequest.builder()
-                .query("") // または空でOK（qパラメータ）
-                .count(100)
-                .offset(0)
-                .order("added")
-                .merged(true) // 同一写真のファイルをマージ
-                .primary(true) // プライマリのみ（一覧用に便利）
-                // 以下は「クエリ文字列ではなくGETパラメータで渡す」派生フィルタ例
-                // .filter("year", "2024")
-                // .filter("type", "image|live")
+                .filter("album", "at0yqoazysvzw949")
                 .build();
 
         final var res = client.searchPhotos(req);
 
-        // 1枚目のサムネイルURLを得る（X-Preview-Token を自動で利用）
-        if (!res.results().isEmpty()) {
-            final var first = res.results().get(0);
-            final var hash = first.hash(); // ファイルSHA1
+        // 取得した一覧のサムネイルURLを得る（X-Preview-Token を自動で利用）
+        for (final SearchResultItem result : res.results()) {
+            final var hash = result.hash(); // ファイルSHA1
             final var thumb500 = client.buildThumbnailUrl(hash, res.previewToken(), "tile_500");
             System.out.println("Thumb: " + thumb500);
         }
