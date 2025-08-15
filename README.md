@@ -1,1 +1,1 @@
-# -photoprism-client-java
+# photoprism-client-java
