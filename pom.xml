@@ -3,7 +3,7 @@
 
     <groupId>jp.livlog.photoprism</groupId>
     <artifactId>photoprism-client-java</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.1.2</version>
     <packaging>jar</packaging>
 
     <name>PhotoPrism Java Client</name>
@@ -17,7 +17,7 @@
         <developerConnection>
             scm:git:https://github.com/blue-islands/photoprism-client-java.git</developerConnection>
         <url>https://github.com/blue-islands/photoprism-client-java</url>
-        <tag>HEAD</tag>
+        <tag>0.1.2</tag>
     </scm>
 
     <properties>
