@@ -2,9 +2,39 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>photoprism-client-java</groupId>
     <artifactId>photoprism-client-java</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>PhotoPrism Java Client</name>
+    <description>Lightweight Java 17 client for PhotoPrism search &amp; thumbnails.</description>
+    <url>https://github.com/blue-islands/photoprism-client-java</url>
+
+    <!-- ★ JitPack に必須の SCM 情報 -->
+    <scm>
+        <connection>
+            scm:git:https://github.com/blue-islands/photoprism-client-java.git</connection>
+        <developerConnection>
+            scm:git:https://github.com/blue-islands/photoprism-client-java.git</developerConnection>
+        <url>https://github.com/blue-islands/photoprism-client-java</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+    </properties>
+
+    <!-- JitPack リポジトリ -->
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -12,14 +42,64 @@
             <version>2.17.1</version>
         </dependency>
     </dependencies>
+
     <build>
+        <!-- プロジェクトが src 配置なので維持（標準は src/main/java） -->
         <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <release>17</release>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
+
+            <!-- ★ リリースタグ作成を自動化（JitPack はタグ/リリースをトリガーにビルド） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <preparationGoals>clean verify</preparationGoals>
+                    <pushChanges>true</pushChanges>
+                    <scmCommentPrefix>[release]</scmCommentPrefix>
+                </configuration>
+            </plugin>
+
+            <!-- 配布物にソース/Javadocを同梱（任意だが利用者に親切） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.10.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>${maven.compiler.release}</source>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <doclint>none</doclint>
                 </configuration>
             </plugin>
         </plugins>

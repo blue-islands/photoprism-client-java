@@ -1,4 +1,4 @@
-package com.example.photoprism;
+package jp.livlog.photoprism;
 
 import java.net.URI;
 import java.net.URLEncoder;
