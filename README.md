@@ -3,28 +3,27 @@
 PhotoPrism の検索API・検索フィルター・サムネイル／動画エンドポイントを扱う Java 17 用の軽量クライアントです。
 HTTP は `java.net.http.HttpClient`、JSON は Jackson を利用します。
 
-## インストール
+## インストール方法 
 
-**Maven**
+Latest Version:
+[![](https://jitpack.io/v/blue-islands/photoprism-client-java.svg)](https://jitpack.io/#blue-islands/photoprism-client-java)
 
+下記の **VERSION** キーを上記の最新バージョンに必ず置き換えてください
+
+Maven
 ```xml
 <dependency>
-  <groupId>com.fasterxml.jackson.core</groupId>
-  <artifactId>jackson-databind</artifactId>
-  <version>2.17.1</version>
+    <groupId>com.github.blue-islands</groupId>
+    <artifactId>photoprism-client-java</artifactId>
+    <version>VERSION</version>
 </dependency>
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 ```
-
-**ソース配置**
-以下のファイルをプロジェクトに追加してください：
-
-* `com.example.photoprism.PhotoPrismClient`
-* `com.example.photoprism.SearchRequest`
-* `com.example.photoprism.SearchResponse`
-* `com.example.photoprism.SearchResultItem`
-* `com.example.photoprism.SearchResultFile`
-
-> 未知フィールドは無視する設定済みなので、API 差分にも強い作りです。
 
 ## クイックスタート
 
