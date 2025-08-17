@@ -1,0 +1,8 @@
+# jitpack.yml
+jdk:
+  - openjdk17
+
+# 念のため SDKMAN で JDK17 を明示（JitPackの既定JDK8を上書き）
+before_install:
+  - sdk install java 17.0.10-tem
+  - sdk use java 17.0.10-tem
